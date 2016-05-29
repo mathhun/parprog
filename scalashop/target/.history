@@ -1,0 +1,19 @@
+test
+~test
+console
+~test
+console
+~test
+runMain scalashop.VerticalBoxBlurRunner
+console
+runMain scalashop.VerticalBoxBlurRunner
+test
+~test
+compile
+console
+compile
+console
+runMain scalashop.VerticalBoxBlurRunner
+runMain scalashop.HorizontalBoxBlurRunner
+submit achemer@gmail.com rLCpfd6zFWiQNVHt
+runMain scalashop.ScalaShop

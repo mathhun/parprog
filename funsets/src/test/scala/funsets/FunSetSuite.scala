@@ -123,12 +123,15 @@ class FunSetSuite extends FunSuite {
       val u1 = union(singletonSet(1), singletonSet(2))
       val u2 = union(singletonSet(3), singletonSet(4))
       val u3 = union(u1, u2)
-      printSet(u3)
       assert(u3(2))
 
       val even: Set = x => x % 2 == 0
       val even3: Set = union(even, singletonSet(3))
       assert(exists(even3, _ % 2 == 1))
+
+      val m: Set = x => x match { case 1 | 3 | 4 | 5 | 7 | 999 => true; case _ => false }
+      val n: Set = map(m, _ - 1)
+      printSet(n)
     }
   }
 }

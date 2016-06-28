@@ -158,7 +158,29 @@ object Anagrams {
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = {
     if (sentence.isEmpty) List(Nil)
     else {
-      Nil
+      def occurrences(cs: Occurrences): List[List[Occurrences]] = {
+        if (cs.isEmpty) List(Nil)
+        else {
+          for {
+            c <- combinations(cs)
+            if c.nonEmpty
+            if dictionaryByOccurrences.get(c).isDefined
+            cs_ <- occurrences(subtract(cs, c))
+          } yield c :: cs_
+        }
+      }
+
+      def words(os: List[Occurrences]): List[Sentence] = {
+        if (os.isEmpty) List(Nil)
+        else {
+          for {
+            w <- dictionaryByOccurrences.getOrElse(os.head, Nil)
+            ws <- words(os.tail)
+          } yield w :: ws
+        }
+      }
+
+      occurrences(sentenceOccurrences(sentence)) flatMap words
     }
   }
 }
